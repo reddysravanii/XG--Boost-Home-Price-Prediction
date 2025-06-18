@@ -1,0 +1,181 @@
+#IMPORT PACKAGES 
+
+import numpy as np
+
+import matplotlib.pyplot as plt
+
+import seaborn as sns
+
+import mpl_toolkits
+
+%matplotlib inline
+
+
+
+import pandas as pd
+
+import os
+
+
+
+# Define the folder where your file is located
+
+folder_path = r"D:\jyo - Copy"  # <-- Replace with your actual folder path
+
+
+
+# Define the file name
+
+file_name = "kc_house_data.csv"
+
+
+
+# Join folder path and file name
+
+file_path = os.path.join(folder_path, file_name)
+
+
+
+# Read the CSV file
+
+try:
+
+    data = pd.read_csv(file_path)
+
+    print("Data loaded successfully!")
+
+    print(data.head())  # Display first 5 rows
+
+except FileNotFoundError:
+
+    print(f"File not found: {file_path}")
+
+except pd.errors.EmptyDataError:
+
+    print("The file is empty.")
+
+except pd.errors.ParserError:
+
+    print("Error parsing the CSV file.")
+
+
+
+data.head()
+
+
+
+data.describe()
+
+
+
+import matplotlib.pyplot as plt
+
+import seaborn as sns
+
+data['bedrooms'].value_counts().plot(kind='bar')
+
+plt.title('number of Bedroom')
+
+plt.xlabel('Bedrooms')
+
+plt.ylabel('Count')
+
+sns.despine
+
+
+
+plt.figure(figsize=(10,10))
+
+sns.jointplot(x=data.lat.values,y=data.long.values,size=10)
+
+plt.ylabel('longitude',fontsize=12)
+
+plt.xlabel('latitude',fontsize=12)
+
+plt.show()
+
+sns.despine
+
+
+
+plt.scatter(data.price,data.sqft_living)
+
+plt.title("Price vs Square Feet")
+
+plt.scatter(data.price,data.long)
+
+plt.title("price vs Location of the area")
+
+import matplotlib.pyplot as plt
+
+plt.scatter(data.bedrooms,data.price)
+
+plt.title("Bedroom and Price")
+
+plt.xlabel("Bedrooms")
+
+plt.ylabel("Price")
+
+plt.show()
+
+sns.despine
+
+
+
+plt.scatter((data['sqft_living']+data['sqft_basement']),data['price'])
+
+plt.scatter(data.waterfront,data.price)
+
+plt.title("Waterfront vs Price( 0= no waterfront)")
+
+plt.scatter(data.floors,data.price)
+
+plt.scatter(data.condition,data.price)
+
+plt.scatter(data.zipcode,data.price)
+
+plt.title("which is the pricey location bt zipcode?")
+
+
+
+from sklearn.linear_model import LinearRegression
+
+from sklearn.model_selection import train_test_split
+
+reg=LinearRegression()
+
+labels=data['price']
+
+conv_dates=[1 if values == 2014 else 0 for values in data.date]
+
+data['date']=conv_dates
+
+train=data.drop(['id','price'],axis=1)
+
+
+
+!pip install scikit-learn
+
+
+
+
+
+from sklearn.model_selection import train_test_split  #from sklearn.model_selection import train_test_split
+
+x_train,x_test,y_train,y_test=train_test_split(train,labels,test_size=0.10,random_state=2)
+
+
+
+reg=LinearRegression()
+
+
+
+reg.fit(x_train,y_train)
+
+
+
+reg.fit(x_train,y_train)
+
+
+
+reg.score(x_test,y_test)
